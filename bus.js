@@ -21,6 +21,28 @@ var usb = new ImageObject('usb', 'images/usb.gif');
 var waterCan = new ImageObject('water-can', 'images/water-can.jpg');
 var wineGlass = new ImageObject('wine-glass', 'images/wine-glass.jpg');
 
+var income = document.getElementById("income").getContext("2d");
+new Chart(income).Bar(barData);
+
+var barData = {
+	labels : allPics[i],
+	datasets : [
+		{
+			fillColor : "#48A497",
+			strokeColor : "#48A4D1",
+			data : allPics.timesShown[i]
+		},
+		{
+			fillColor : "rgba(73,188,170,0.4)",
+			strokeColor : "rgba(72,174,209,0.4)",
+			data : allPics.timesClicked[i]
+		}
+
+	]
+}
+
+var counter = 0;
+
 function ImageObject(imageName, filePath){
   this.imageName = imageName;
   this.filePath = filePath;
@@ -37,34 +59,73 @@ function makeRandomImage(){
   return Math.floor(Math.random() * allPics.length);
 }
 
-var divOne = document.getElementById('divOne');
-var divTwo = document.getElementById('divTwo');
-var divThree = document.getElementById('divThree');
+function appendDivs(){
+  var divOne = document.getElementById('divOne');
+  var divTwo = document.getElementById('divTwo');
+  var divThree = document.getElementById('divThree');
 
-var imgOne = document.createElement('img');
-var arrayElement = makeRandomImage();
-imgOne.src = allPics[arrayElement].filePath;
-divOne.appendChild(imgOne);
+  divOne.innerHTML = '';
+  divTwo.innerHTML = '';
+  divThree.innerHTML = '';
 
-var imgTwo = document.createElement('img');
-var arrayElementTwo = makeRandomImage();
-while (arrayElementTwo === arrayElement) {
-  arrayElementTwo = makeRandomImage();
+  var imgOne = document.createElement('img');
+  var arrayElement = makeRandomImage();
+  imgOne.src = allPics[arrayElement].filePath;
+  imgOne.id = allPics[arrayElement].imageName;
+  allPics[arrayElement].timesShown++;
+  divOne.appendChild(imgOne);
+
+  var imgTwo = document.createElement('img');
+  var arrayElementTwo = makeRandomImage();
+  while (arrayElementTwo === arrayElement) {
+    arrayElementTwo = makeRandomImage();
+  }
+  imgTwo.src = allPics[arrayElementTwo].filePath;
+  imgTwo.id = allPics[arrayElementTwo].imageName;
+
+  allPics[arrayElementTwo].timesShown++;
+  divTwo.appendChild(imgTwo);
+
+  var imgThree = document.createElement('img');
+  var arrayElementThree = makeRandomImage();
+  while (arrayElementThree === arrayElementTwo || arrayElementThree === arrayElement) {
+    arrayElementThree = makeRandomImage();
+  }
+  imgThree.src = allPics[arrayElementThree].filePath;
+  imgThree.id = allPics[arrayElementThree].imageName;
+
+  allPics[arrayElementThree].timesShown++;
+  divThree.appendChild(imgThree);
 }
-imgTwo.src = allPics[arrayElementTwo].filePath;
-divTwo.appendChild(imgTwo);
 
-var imgThree = document.createElement('img');
-var arrayElementThree = makeRandomImage();
-while (arrayElementThree === arrayElementTwo && arrayElement) {
-  arrayElementThree = makeRandomImage();
+function clickHandler(event){
+  console.log(event.target.id);
+  counter++;
+  for(i = 0; i < allPics.length; i++){
+    if(allPics[i].imageName === event.target.id){
+      allPics[i].timesClicked++;
+    }
+  }
+  appendDivs();
 }
-imgThree.src = allPics[arrayElementThree].filePath;
-divThree.appendChild(imgThree);
 
-var elClick = document.getElementById('divOne').addEventListener('click', clickCount());
-
-function clickCount(){
-  this.timesClicked + 1;
-  // console.log(this.timesClicked);
+if(counter < 25){
+  appendDivs();
+} else{
+  var divBut = document.getElementById('clickMore');
+  var butOne = document.createElement('button');
+  butOne.innerHTML('See Results!');
+  divBut.appendChild(butOne);
+      // add events attached to two buttons
+      // those events should have event handlers
 }
+
+
+
+var el = document.getElementById('divOne');
+el.addEventListener('click', clickHandler);
+
+// var elButton = document.getElementById('results');
+// elButton.addEventListener('click', buttonHandler);
+
+appendDivs();
