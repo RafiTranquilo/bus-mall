@@ -4,20 +4,25 @@
     <meta charset="utf-8" />
         <title>Chart.js demo</title>
         <script src='Chart.min.js'></script>
+        <link rel="stylesheet" href="busMall.css" type="text/css">
   </head>
 
 
 
   <body>
+
+    <header id="banner">Enter the BusMall~~~</header>
     <main>
       <div class="imgDiv" id="divOne"></div>
       <div class="imgDiv" id="divTwo"></div>
       <div class="imgDiv" id="divThree"></div>
 
-      <div class="buttonDiv" id="clickMore"></div>
-      <!-- <div class="buttonDiv" id="results"></div> -->
-      <button>More Clicks</button>
-      <canvas id="income" width="600" height="400"></canvas>
+      <div class="buttonDiv" >
+        <button id="clickMore">25 More Clicks</button>
+        <button id="showGraph">Show Graph</button>
+      </div>
+
+      <canvas id="myChart" width="500" height="500"></canvas>
     </main>
 
     <script src="bus.js"></script>

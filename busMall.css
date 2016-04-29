@@ -1,16 +1,41 @@
 body{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  align-content:space-between;
+  background-color: skyblue;
+
 }
 
+#banner{
+  display: flex;
+  font-size: 28px;
+  color: violet;
+  font-family: helvetica;
+}
 main{
   display:inline-flex;
   height:300px;
   width:300px;
 }
 
-.imgDiv{
-  display: inline-flex;
+#divOne{
+  display:inline-flex;
   height:300px;
   width:300px;
+}
+#divTwo{
+  display:inline-flex;
+  height:300px;
+  width:300px;
+}
+#divThree{
+  display:inline-flex;
+  height:300px;
+  width:300px;
+}
+
+.buttonDiv{
+  visibility: hidden;
 }

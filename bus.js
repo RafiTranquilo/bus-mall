@@ -21,26 +21,6 @@ var usb = new ImageObject('usb', 'images/usb.gif');
 var waterCan = new ImageObject('water-can', 'images/water-can.jpg');
 var wineGlass = new ImageObject('wine-glass', 'images/wine-glass.jpg');
 
-var income = document.getElementById("income").getContext("2d");
-new Chart(income).Bar(barData);
-
-var barData = {
-	labels : allPics[i],
-	datasets : [
-		{
-			fillColor : "#48A497",
-			strokeColor : "#48A4D1",
-			data : allPics.timesShown[i]
-		},
-		{
-			fillColor : "rgba(73,188,170,0.4)",
-			strokeColor : "rgba(72,174,209,0.4)",
-			data : allPics.timesClicked[i]
-		}
-
-	]
-}
-
 var counter = 0;
 
 function ImageObject(imageName, filePath){
@@ -52,13 +32,15 @@ function ImageObject(imageName, filePath){
 }
 
 ImageObject.prototype.incrementTimesShown = function() {
-  return this.timesShown += 1;
+  return timesShown += 1;
 };
 
+//making a random number
 function makeRandomImage(){
   return Math.floor(Math.random() * allPics.length);
 }
 
+//function for generating pictures into the empty div elements
 function appendDivs(){
   var divOne = document.getElementById('divOne');
   var divTwo = document.getElementById('divTwo');
@@ -82,7 +64,6 @@ function appendDivs(){
   }
   imgTwo.src = allPics[arrayElementTwo].filePath;
   imgTwo.id = allPics[arrayElementTwo].imageName;
-
   allPics[arrayElementTwo].timesShown++;
   divTwo.appendChild(imgTwo);
 
@@ -93,7 +74,6 @@ function appendDivs(){
   }
   imgThree.src = allPics[arrayElementThree].filePath;
   imgThree.id = allPics[arrayElementThree].imageName;
-
   allPics[arrayElementThree].timesShown++;
   divThree.appendChild(imgThree);
 }
@@ -106,26 +86,79 @@ function clickHandler(event){
       allPics[i].timesClicked++;
     }
   }
+  if(counter < 25){
+    appendDivs();
+  }
+  else if(counter === 25){
+    clickSet();
+  }
+  // clickSet();
+  // appendDivs();
+}
+
+function clickSet(){
+
+document.getElementById('clickMore').style.visibility = 'visible';
+document.getElementById('showGraph').style.visibility = 'visible';
+  var imgDivs = document.getElementsByClassName('imgDiv');
+  imgDivs[0].style.display = 'none';
+  imgDivs[1].style.display = 'none';
+  imgDivs[2].style.display = 'none';
+}
+
+function newTriesHandler(){
+  counter = 0;
+  var imgDivs = document.getElementsByClassName('imgDiv');
+  imgDivs[0].style.display = 'inline-flex';
+  imgDivs[1].style.display = 'inline-flex';
+  imgDivs[2].style.display = 'inline-flex';
+  document.getElementById('showGraph').style.visibility = 'hidden';
+  document.getElementById('clickMore').style.visibility = 'hidden';
   appendDivs();
 }
 
-if(counter < 25){
-  appendDivs();
-} else{
-  var divBut = document.getElementById('clickMore');
-  var butOne = document.createElement('button');
-  butOne.innerHTML('See Results!');
-  divBut.appendChild(butOne);
-      // add events attached to two buttons
-      // those events should have event handlers
+function renderChart(){
+  var names = [];
+  var xClicked = [];
+  console.log('hey cutie pie');
+  for (i = 0; i < allPics.length; i++){
+    names.push(allPics[i].imageName);
+    xClicked.push(allPics[i].timesClicked);
+  }
+
+  var data = {
+    labels: names,
+    datasets: [
+      {fillColor:'#8a00e6',
+      strokeColor:'#00e64d',
+      data: xClicked,
+    }]
+  };
+// var ctx = document.getElementById('myChart').getContext('2d');
+// new Chart(ctx).Bar(data);
+
+  var ctx = document.getElementById('myChart');
+  var myChart = new Chart(ctx, {
+    type:'bar',
+    data: data,
+    // options :{
+    //   responsive:false
+  });
 }
 
-
-
+// generating new random images after each click
 var el = document.getElementById('divOne');
 el.addEventListener('click', clickHandler);
+var elTwo = document.getElementById('divTwo');
+elTwo.addEventListener('click', clickHandler);
+var elThree = document.getElementById('divThree');
+elThree.addEventListener('click', clickHandler);
 
-// var elButton = document.getElementById('results');
-// elButton.addEventListener('click', buttonHandler);
+//click event to give user 25 new clicks
+var clickEl = document.getElementById('clickMore');
+clickEl.addEventListener('click', newTriesHandler);
+var elChart = document.getElementById('showGraph');
+elChart.addEventListener('click', renderChart);
 
 appendDivs();
+// renderChart();
