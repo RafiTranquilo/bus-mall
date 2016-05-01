@@ -3,7 +3,7 @@ body{
   flex-direction: column;
   justify-content:center;
   align-items: center;
-  align-content:space-between;
+  align-content:space-around;
   background-color: skyblue;
 
 }
@@ -14,13 +14,24 @@ body{
   color: violet;
   font-family: helvetica;
 }
-main{
+
+/*main{
   display:inline-flex;
   height:300px;
   width:300px;
+}*/
+.pics{
+display:inline-flex;
+justify-content: space-between;
 }
 
-#divOne{
+.pics img{
+  height:300px;
+  width:300px;
+  margin:20px;
+}
+
+/*#divOne{
   display:inline-flex;
   height:300px;
   width:300px;
@@ -34,8 +45,16 @@ main{
   display:inline-flex;
   height:300px;
   width:300px;
-}
+}*/
 
 .buttonDiv{
   visibility: hidden;
+}
+.info{
+  font-family: helvetica;
+}
+.canvasChart{
+margin:0 auto;
+width:550px;
+height:550px;
 }

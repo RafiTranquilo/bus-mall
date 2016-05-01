@@ -11,18 +11,24 @@
 
   <body>
 
-    <header id="banner">Enter the BusMall~~~</header>
+    <header id="banner">~~~Enter the BusMall~~~</header>
     <main>
-      <div class="imgDiv" id="divOne"></div>
-      <div class="imgDiv" id="divTwo"></div>
-      <div class="imgDiv" id="divThree"></div>
-
+      <section class="pics">
+        <div class="imgDiv" id="divOne"></div>
+        <div class="imgDiv" id="divTwo"></div>
+        <div class="imgDiv" id="divThree"></div>
+    </section>
+    <section>
+      <article class="info">Hello! Welcome to BusMall, your future to successful mobile shopping. You are fortunate enough to be able to participate in making our products and services the best they can be! Try clicking through these items above, based on your preferences. At the end, you will be presented an infograph based on your selections. Thanks for participating, and see you on the open road!</article>
+    </section>
       <div class="buttonDiv" >
         <button id="clickMore">25 More Clicks</button>
         <button id="showGraph">Show Graph</button>
       </div>
 
-      <canvas id="myChart" width="500" height="500"></canvas>
+      <section class="canvasChart">
+      <canvas id="myChart" width="300" height="300"></canvas>
+    </section>
     </main>
 
     <script src="bus.js"></script>
