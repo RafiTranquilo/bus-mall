@@ -40,6 +40,7 @@ function makeRandomImage(){
   return Math.floor(Math.random() * allPics.length);
 }
 
+
 //function for generating pictures into the empty div elements
 function appendDivs(){
   var divOne = document.getElementById('divOne');
@@ -117,6 +118,23 @@ function newTriesHandler(){
   appendDivs();
 }
 
+//setting up local storage
+(function checkStorage(){
+  if(localStorage.imgData){
+    console.log('data exists');
+    var parsedImageData = JSON.parsed(localStorage.imgData);
+    for( var i = 0; i < allPics.length; i++){
+      parsedImageData[i].incrementTimesShown = function() {
+        return timesShown += 1;
+      };
+    }
+    allPics = parsedImageData;
+  } else{
+    console.log('storage does not exist');
+  }
+})();
+
+//rendering the canvas chart
 function renderChart(){
   var names = [];
   var xClicked = [];
@@ -129,13 +147,12 @@ function renderChart(){
   var data = {
     labels: names,
     datasets: [
-      {fillColor:'#8a00e6',
-      strokeColor:'#00e64d',
+      {label: 'times clicked',
+      backgroundColor:'#ff8000',
+      strokeColor:'#ff8000',
       data: xClicked,
-    }]
+    }],
   };
-// var ctx = document.getElementById('myChart').getContext('2d');
-// new Chart(ctx).Bar(data);
 
   var ctx = document.getElementById('myChart');
   var myChart = new Chart(ctx, {
@@ -145,6 +162,8 @@ function renderChart(){
     //   responsive:false
   });
 }
+
+localStorage.setItem('imgData', JSON.stringify(allPics));
 
 // generating new random images after each click
 var el = document.getElementById('divOne');
