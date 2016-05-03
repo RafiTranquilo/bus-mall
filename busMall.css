@@ -31,7 +31,7 @@ justify-content: space-between;
   margin:20px;
 }
 
-/*#divOne{
+#divOne{
   display:inline-flex;
   height:300px;
   width:300px;
@@ -45,13 +45,15 @@ justify-content: space-between;
   display:inline-flex;
   height:300px;
   width:300px;
-}*/
+}
 
 .buttonDiv{
   visibility: hidden;
 }
 .info{
+  display: flex;
   font-family: helvetica;
+  margin-top:30px;
 }
 .canvasChart{
 margin:0 auto;

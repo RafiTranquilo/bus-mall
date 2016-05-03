@@ -115,24 +115,25 @@ function newTriesHandler(){
   imgDivs[2].style.display = 'inline-flex';
   document.getElementById('showGraph').style.visibility = 'hidden';
   document.getElementById('clickMore').style.visibility = 'hidden';
+  document.getElementById('myChart').style.visibility = 'hidden';
   appendDivs();
 }
 
 //setting up local storage
-(function checkStorage(){
-  if(localStorage.imgData){
-    console.log('data exists');
-    var parsedImageData = JSON.parsed(localStorage.imgData);
-    for( var i = 0; i < allPics.length; i++){
-      parsedImageData[i].incrementTimesShown = function() {
-        return timesShown += 1;
-      };
-    }
-    allPics = parsedImageData;
-  } else{
-    console.log('storage does not exist');
-  }
-})();
+// (function checkStorage(){
+//   if(localStorage.imgData){
+//     console.log('data exists');
+//     var parsedImageData = JSON.parsed(localStorage.imgData);
+//     for( var i = 0; i < allPics.length; i++){
+//       parsedImageData[i].incrementTimesShown = function() {
+//         return timesShown += 1;
+//       };
+//     }
+//     allPics = parsedImageData;
+//   } else{
+//     console.log('storage does not exist');
+//   }
+// })();
 
 //rendering the canvas chart
 function renderChart(){
